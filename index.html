@@ -1,0 +1,56 @@
+<html>
+<head>
+    <title>Index</title>
+  <script src="js/jquery-1.12.0.min.js"></script>
+  <script>
+
+    function addIframe() {
+      console.log($('#myIframe'));
+      var _iframeHtml = document.createElement('iframe');
+      _iframeHtml.src = "http://localhost:3001"
+      _iframeHtml.id = 'myIframe';
+      _iframeHtml.width = '100%';
+
+      _iframeHtml.style['display'] = 'block';
+
+      document.body.appendChild(_iframeHtml);
+    }
+
+    function addFullScreenStyle(iframe) {
+      iframe.css({'position':"fixed", 'top':"0px", "left":"0px", "bottom":"0px", "right":"0px", "width":"100%", "height":"100%", "border":"none", "margin":"0", "padding":"0", "overflow":"hidden", "z-index":"999999", "background-color":"white"});
+    }
+
+    function setHeight(e, iframe){
+      var iframeHeight = e.data[1];
+      iframe.height(iframeHeight);
+    }
+
+
+
+    function reactToEvent (e) {
+      var iframe = $("#myIframe");
+      var eventName = e.data[0];
+
+      switch(eventName) {
+        case 'setHeight':
+          setHeight(e, iframe);
+          break;
+        case 'goFullScreen':
+          addFullScreenStyle(iframe);
+          break;
+        case 'hideFrame':
+          iframe.remove();
+          break;
+      }
+    }
+    function messageEventResponse(e) {
+       reactToEvent(e);
+    }
+    window.addEventListener('message', messageEventResponse, false);
+  </script>
+</head>
+<body>
+    <h1>Iframe goes her</h1>
+    <a href="#" onclick="addIframe()">Pay</a>
+</body>
+</html>
