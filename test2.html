@@ -14,10 +14,13 @@
     </head>
     <body>
 
+        <img src="/assets/images/3d-secure-steg3.png">
 
-
-        <p>Under kommer en iframe som skal justere størrelse</p>
-
-        </script> 
+        <a href="#" onclick="hideFrame()">Jeg er ferdig</a>
+        <script type="text/javascript">
+            function hideFrame() {
+                window.parent.postMessage(['hideFrame', {}], "*")
+            }
+        </script>
     </body>
 </html>
